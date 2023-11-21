@@ -36,6 +36,15 @@ public class Controller_Server {
 
                 break;
             }
+            
+            case "logout" -> {
+                if (uBLL.Logout(json.getString("email")) == 0) {
+                    json.put("status", false);
+                } else {
+                    json.put("status", true);
+                }
+                break;
+            }
 
             case "signup" -> {
                 if (uBLL.insertUser(json.getString("email"), json.getString("password")) == 0) {
@@ -493,14 +502,7 @@ public class Controller_Server {
 //                json.put("data", examlist);
 //                break;
 //            }
-            case "logout" -> {
-                if (uBLL.Logout(json.getString("email")) == 0) {
-                    json.put("status", false);
-                } else {
-                    json.put("status", true);
-                }
-                break;
-            }
+            
 
             default -> {
 
