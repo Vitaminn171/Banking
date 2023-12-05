@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Nov 21, 2023 at 07:53 AM
+-- Generation Time: Dec 05, 2023 at 08:25 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -33,7 +33,7 @@ CREATE TABLE `transaction` (
   `receiver` varchar(50) NOT NULL,
   `total` int(50) NOT NULL,
   `note` varchar(200) NOT NULL,
-  `date` date NOT NULL
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -41,17 +41,18 @@ CREATE TABLE `transaction` (
 --
 
 INSERT INTO `transaction` (`transaction_id`, `sender`, `receiver`, `total`, `note`, `date`) VALUES
-(1, 'abc@gmail.com', 'an@gmail.com', 1000000, 'abcxyzádfasdfasdfasdfasfasfasfasdfafafasdfafasdfasfasdfasdf', '2023-11-06'),
-(2, 'an@gmail.com', 'an1@gmail.com', 1000, 'asdfasdf', '2023-11-01'),
-(3, 'an1@gmail.com', 'an@gmail.com', 1000, 'asgdfgsdfhg', '2023-11-01'),
-(4, 'ahha@gmail.com', 'an@gmail.com', 10000, 'dfgssdfg', '2023-11-05'),
-(5, 'an@gmail.com', 'hehe@gmail.com', 300000, 'hehe', '2023-11-15'),
-(6, 'an@gmail.com', 'hehe@gmail.com', 20000, 'hehehehe', '2023-11-15'),
-(7, 'hehe@gmail.com', 'an@gmail.com', 200000, 'give back test', '2023-11-15'),
-(8, 'an@gmail.com', 'hehe@gmail.com', 100000, 'he', '2023-11-15'),
-(9, 'an@gmail.com', 'hehe@gmail.com', 50000, 'ok', '2023-11-21'),
-(10, 'quocan@gmail.com', 'an@gmail.com', 50000, 'ok', '2023-11-21'),
-(11, 'lyquocan@gmail.com', 'an@gmail.com', 500000, 'transfer money test', '2023-11-21');
+(1, 'abc@gmail.com', 'an@gmail.com', 1000000, 'abcxyzádfasdfasdfasdfasfasfasfasdfafafasdfafasdfasfasdfasdf', '2023-11-05 17:00:00'),
+(2, 'an@gmail.com', 'an1@gmail.com', 1000, 'asdfasdf', '2023-10-31 17:00:00'),
+(3, 'an1@gmail.com', 'an@gmail.com', 1000, 'asgdfgsdfhg', '2023-10-31 17:00:00'),
+(4, 'ahha@gmail.com', 'an@gmail.com', 10000, 'dfgssdfg', '2023-11-04 17:00:00'),
+(5, 'an@gmail.com', 'hehe@gmail.com', 300000, 'hehe', '2023-11-14 17:00:00'),
+(6, 'an@gmail.com', 'hehe@gmail.com', 20000, 'hehehehe', '2023-11-14 17:00:00'),
+(7, 'hehe@gmail.com', 'an@gmail.com', 200000, 'give back test', '2023-11-14 17:00:00'),
+(8, 'an@gmail.com', 'hehe@gmail.com', 100000, 'he', '2023-11-14 17:00:00'),
+(9, 'an@gmail.com', 'hehe@gmail.com', 50000, 'ok', '2023-11-20 17:00:00'),
+(10, 'quocan@gmail.com', 'an@gmail.com', 50000, 'ok', '2023-11-20 17:00:00'),
+(11, 'lyquocan@gmail.com', 'an@gmail.com', 500000, 'transfer money test', '2023-11-21 03:09:00'),
+(12, 'an@gmail.com', 'an3@gmail.com', 55555, 'test time', '2023-12-05 07:10:38');
 
 -- --------------------------------------------------------
 
@@ -72,9 +73,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`email`, `password`, `status`, `money`) VALUES
 ('an2@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 0),
-('an3@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 0),
+('an3@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 55555),
 ('an4@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 0),
-('an@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 650000),
+('an@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 594445),
 ('hehe@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 270000),
 ('lyquocan@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 500000),
 ('quocan@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 50000);
@@ -103,7 +104,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transaction_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `transaction_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
