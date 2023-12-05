@@ -37,7 +37,7 @@ public class TransactionDAL extends MyDatabaseManager{
                 t.setReceiver(rs.getString("receiver"));
                 t.setNote(rs.getString("note"));
                 t.setTotal(rs.getInt("total"));
-                t.setDate(rs.getDate("date"));
+                t.setDate(rs.getString("date"));
                 list.add(t);
             }
         }
@@ -60,7 +60,7 @@ public class TransactionDAL extends MyDatabaseManager{
                 t.setReceiver(rs.getString("receiver"));
                 t.setNote(rs.getString("note"));
                 t.setTotal(rs.getInt("total"));
-                t.setDate(rs.getDate("date"));
+                t.setDate(rs.getString("date"));
                 list.add(t);
             }
         }
@@ -84,7 +84,7 @@ public class TransactionDAL extends MyDatabaseManager{
                 t.setReceiver(rs.getString("receiver"));
                 t.setNote(rs.getString("note"));
                 t.setTotal(rs.getInt("total"));
-                t.setDate(rs.getDate("date"));
+                t.setDate(rs.getString("date"));
                 list.add(t);
             }
         }
@@ -109,7 +109,7 @@ public class TransactionDAL extends MyDatabaseManager{
                 t.setReceiver(rs.getString("receiver"));
                 t.setNote(rs.getString("note"));
                 t.setTotal(rs.getInt("total"));
-                t.setDate(rs.getDate("date"));
+                t.setDate(rs.getString("date"));
                 list.add(t);
             }
         }
@@ -126,7 +126,7 @@ public class TransactionDAL extends MyDatabaseManager{
             t.setSender(rs.getString("sender"));
             t.setReceiver(rs.getString("receiver"));
             t.setNote(rs.getString("note"));
-            t.setDate(rs.getDate("date"));
+            t.setDate(rs.getString("date"));
             t.setTotal(rs.getInt("total"));
             return t;
         }

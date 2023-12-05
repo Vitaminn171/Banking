@@ -349,7 +349,7 @@ public class Transactions extends javax.swing.JFrame {
         JSONObject jsonSend = new JSONObject();
 
         jsonSend.put("email", email);
-        jsonSend.put("date", date);
+        jsonSend.put("date", date + " 23:59:59");
         jsonSend.put("func", "getTransactionsDate");
         String dataReceive = "";
         try {
@@ -370,8 +370,8 @@ public class Transactions extends javax.swing.JFrame {
         JSONObject jsonSend = new JSONObject();
 
         jsonSend.put("email", email);
-        jsonSend.put("fromDate", fromDate);
-        jsonSend.put("toDate", toDate);
+        jsonSend.put("fromDate", fromDate + " 00:00:00");
+        jsonSend.put("toDate", toDate + " 23:59:59");
         jsonSend.put("func", "getTransactionsBetween");
         String dataReceive = "";
         try {

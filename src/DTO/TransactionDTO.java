@@ -4,6 +4,7 @@
  */
 package DTO;
 
+import java.security.Timestamp;
 import java.util.Date;
 
 /**
@@ -16,7 +17,7 @@ public class TransactionDTO {
     private String receiver;
     private String sender;
     private String note;
-    private Date date;  
+    private String date;  
 
     /**
      * @return the id
@@ -91,14 +92,14 @@ public class TransactionDTO {
     /**
      * @return the date
      */
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
     /**
      * @param date the date to set
      */
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

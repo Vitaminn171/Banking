@@ -286,6 +286,10 @@ public class TranferMoney extends javax.swing.JFrame {
             String note = String.valueOf(jTextArea_note.getText());
             int balance = money - amount;
             Date date = new Date();
+            
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+            System.out.println(timeFormat.format(date.getTime()));
+           
             SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
             jsonSend.put("email", email);
@@ -293,7 +297,7 @@ public class TranferMoney extends javax.swing.JFrame {
             jsonSend.put("note", note);
             jsonSend.put("receiver", receiver);
             jsonSend.put("balance", balance);
-            jsonSend.put("date", dateFormatter.format(date));
+            jsonSend.put("date", dateFormatter.format(date) + " " + timeFormat.format(date.getTime()));
             jsonSend.put("func", "transferMoney");
             String dataReceive = "";
             try {
