@@ -17,6 +17,8 @@ import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.border.DropShadowBorder;
@@ -63,6 +65,13 @@ public class SignUp extends javax.swing.JFrame {
 
             }
         });
+    }
+    
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 
     /**
@@ -244,32 +253,40 @@ public class SignUp extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String email = jTextField_email.getText();
         JSONObject jsonSend = new JSONObject();
-
-        String pass = String.valueOf(jPasswordField2.getPassword());
-        String hashPass = MD5.getMd5(pass); //hash md5 for password
-
-        jsonSend.put("email", email);
-        jsonSend.put("password", hashPass);
-        jsonSend.put("func", "signup");
-        String dataReceive = "";
-        try {
-            dataReceive = controller.SendReceiveData(jsonSend.toString());
-        } catch (Exception ex) {
-            System.out.println(ex);
-            //Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        JSONObject json = new JSONObject(dataReceive);
         
-        if(json.getBoolean("status")){
+        //check email validate
+        
+        if(isValidEmail(email)){
+            String pass = String.valueOf(jPasswordField2.getPassword());
+            String hashPass = MD5.getMd5(pass); //hash md5 for password
+
+            jsonSend.put("email", email);
+            jsonSend.put("password", hashPass);
+            jsonSend.put("func", "signup");
+            String dataReceive = "";
             try {
-                new Home(json).setVisible(true);
-            } catch (ParseException ex) {
-                Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+                dataReceive = controller.SendReceiveData(jsonSend.toString());
+            } catch (Exception ex) {
+                System.out.println(ex);
+                //Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-            this.dispose();
+            JSONObject json = new JSONObject(dataReceive);
+
+            if(json.getBoolean("status")){
+                try {
+                    new Home(json).setVisible(true);
+                } catch (ParseException ex) {
+                    Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(this, "Email đã được sử dụng!");
+            }
         }else{
-            JOptionPane.showMessageDialog(this, "Email have been used!");
+            JOptionPane.showMessageDialog(this, "Email sai định dạng!");
         }
+
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_emailActionPerformed
