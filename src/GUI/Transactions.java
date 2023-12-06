@@ -33,6 +33,7 @@ import org.json.JSONObject;
 import javax.swing.event.ChangeEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -43,8 +44,7 @@ public class Transactions extends javax.swing.JFrame {
     JFrame frame = this;
     Controller controller = new Controller();
     DecimalFormat formatter = new DecimalFormat("###,###,###,###");
-    private static boolean changingModel = false;
-    private static boolean changingModel1 = false;
+    private boolean changingModel = false;
 
     public Transactions(JSONObject json) throws ParseException {
         initComponents();
@@ -76,16 +76,16 @@ public class Transactions extends javax.swing.JFrame {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
         model.addChangeListener((ChangeEvent e) -> {
-            if (!changingModel) {
+            if (e instanceof ChangeEvent) {
                 //System.out.println("Model 1 changed: " + model.getValue());
-                updateTextField(model, datePicker, dateFormatter, changingModel);
+                updateTextField(model, datePicker, dateFormatter);
             }
         });
 
         model1.addChangeListener((ChangeEvent event) -> {
-            if (!changingModel1) {
+            if (event instanceof ChangeEvent) {
                 //System.out.println("Model 2 changed: " + model1.getValue());
-                updateTextField(model1, datePicker1, dateFormatter, changingModel1);
+                updateTextField(model1, datePicker1, dateFormatter);
             }
         });
 //        model.addChangeListener((ChangeEvent e) -> {
@@ -151,13 +151,13 @@ public class Transactions extends javax.swing.JFrame {
 //        });
     }
 
-    private static void updateTextField(UtilDateModel model, JDatePickerImpl datePicker, SimpleDateFormat dateFormatter, boolean changingModel) {
+    private void updateTextField(UtilDateModel model, JDatePickerImpl datePicker, SimpleDateFormat dateFormatter) {
         if (model.getValue() != null) {
             Date date = model.getValue();
             String formattedDate = dateFormatter.format(date);
-            changingModel = true;  // Set to true to avoid triggering additional changes
+            SwingUtilities.invokeLater(() -> {
             datePicker.getJFormattedTextField().setText(formattedDate);
-            changingModel = false; // Reset to false after updating the text field
+        });
         }
     }
 
