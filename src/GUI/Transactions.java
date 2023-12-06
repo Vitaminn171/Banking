@@ -44,6 +44,7 @@ public class Transactions extends javax.swing.JFrame {
     Controller controller = new Controller();
     DecimalFormat formatter = new DecimalFormat("###,###,###,###");
     private static boolean changingModel = false;
+    private static boolean changingModel1 = false;
 
     public Transactions(JSONObject json) throws ParseException {
         initComponents();
@@ -76,15 +77,15 @@ public class Transactions extends javax.swing.JFrame {
 
         model.addChangeListener((ChangeEvent e) -> {
             if (!changingModel) {
-                System.out.println("Model 1 changed: " + model.getValue());
-                updateTextField(model, datePicker, dateFormatter);
+                //System.out.println("Model 1 changed: " + model.getValue());
+                updateTextField(model, datePicker, dateFormatter, changingModel);
             }
         });
 
         model1.addChangeListener((ChangeEvent event) -> {
-            if (!changingModel) {
-                System.out.println("Model 2 changed: " + model1.getValue());
-                updateTextField(model1, datePicker1, dateFormatter);
+            if (!changingModel1) {
+                //System.out.println("Model 2 changed: " + model1.getValue());
+                updateTextField(model1, datePicker1, dateFormatter, changingModel1);
             }
         });
 //        model.addChangeListener((ChangeEvent e) -> {
@@ -150,7 +151,7 @@ public class Transactions extends javax.swing.JFrame {
 //        });
     }
 
-    private static void updateTextField(UtilDateModel model, JDatePickerImpl datePicker, SimpleDateFormat dateFormatter) {
+    private static void updateTextField(UtilDateModel model, JDatePickerImpl datePicker, SimpleDateFormat dateFormatter, boolean changingModel) {
         if (model.getValue() != null) {
             Date date = model.getValue();
             String formattedDate = dateFormatter.format(date);
@@ -496,33 +497,37 @@ public class Transactions extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton_back)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
                 .addGap(85, 85, 85)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
-                .addComponent(jButton_search, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addComponent(jButton_search)
+                .addGap(58, 58, 58))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton_back)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2))
-                    .addComponent(jButton_search, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(49, 49, 49)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton_search)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
