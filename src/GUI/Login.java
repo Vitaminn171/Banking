@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import org.json.JSONObject;
 import com.formdev.flatlaf.FlatClientProperties;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -270,13 +271,18 @@ public class Login extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         JSONObject json = new JSONObject(dataReceive);
-
-        try {
+        if(json.getBoolean("status")){
+            try {
             new Home(json).setVisible(true);
         } catch (ParseException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
+
+        }else{
+            JOptionPane.showMessageDialog(this, json.getString("message"));
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_emailActionPerformed
